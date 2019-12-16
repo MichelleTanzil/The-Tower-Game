@@ -7,15 +7,18 @@ public class Player : MonoBehaviour
 {
     //Config
     [SerializeField] float runSpeed = 5f;
-    Rigidbody2D myRigidBody;
     [SerializeField] float jumpSpeed = 5f;
+    float runTime;
+    bool jumpSwitch;
 
     //State
     bool isAlive = true;
 
     //Cached
+    Rigidbody2D myRigidBody;
     Animator myAnimator;
-    Collider2D myColldier2D;
+    CapsuleCollider2D myBodyColldier;
+    BoxCollider2D myFeet;
     // Start is called before the first frame update
 
     //Message then methods
@@ -23,7 +26,8 @@ public class Player : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myColldier2D = GetComponent<Collider2D>();
+        myBodyColldier = GetComponent<CapsuleCollider2D>();
+        myFeet = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -36,25 +40,55 @@ public class Player : MonoBehaviour
 
     private void Run()
     {
-        if (!myColldier2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (!myFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
             return;
 
-        float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal"); //vslue is between -1 to +1
+        float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal"); //value is between -1 to +1
         Vector2 playerVelocity = new Vector2(controlThrow * runSpeed, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
 
         bool horizontalSpeed = Mathf.Abs(myRigidBody.velocity.x) > Mathf.Epsilon;
         myAnimator.SetBool("Running", horizontalSpeed);
+
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            runTime += Time.deltaTime;
+            if (runTime > 1)
+            {
+                jumpSwitch = true;
+            }
+            else
+            {
+                jumpSwitch = false;
+            }
+        }
+        else
+        {
+            runTime = 0;
+        }
     }
 
     private void Jump()
     {
-        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        if (!myFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            return;
+        if (jumpSwitch)
         {
-            Vector2 jumpVelocityToAdd = new Vector2(0f, jumpSpeed);
-            myRigidBody.velocity += jumpVelocityToAdd;
+            if (CrossPlatformInputManager.GetButtonDown("Jump"))
+            {
+                Vector2 jumpVelocityToAdd = new Vector2(0f, jumpSpeed * 1.25f);
+                myRigidBody.velocity += jumpVelocityToAdd;
+            }
+        } else { 
+            if (CrossPlatformInputManager.GetButtonDown("Jump"))
+            {
+                Vector2 jumpVelocityToAdd = new Vector2(0f, jumpSpeed);
+                myRigidBody.velocity += jumpVelocityToAdd;
+            }
         }
     }
+
+
     private void FlipSprite()
     //if the player is moving horizontally
     {
