@@ -16,8 +16,8 @@ TagManager:
   - Ground
   - Player
   - Background
-  - 
-  - 
+  - Enemy
+  - Hazards
   - 
   - 
   - 
@@ -46,6 +46,12 @@ TagManager:
     locked: 0
   - name: Background Sprites
     uniqueID: 415818265
+    locked: 0
+  - name: Enemy
+    uniqueID: 2574090493
+    locked: 0
+  - name: Hazards
+    uniqueID: 3086565421
     locked: 0
   - name: Player
     uniqueID: 884365455

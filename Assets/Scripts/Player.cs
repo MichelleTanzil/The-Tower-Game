@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     //Config
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 5f;
+    [SerializeField] Vector2 deathKick = new Vector2(25f, 25f);
     float runTime;
     bool jumpSwitch;
 
@@ -33,9 +34,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isAlive) { return; }
         Run();
         Jump();
         FlipSprite();
+        Die();
     }
 
     private void Run()
@@ -87,8 +90,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-
     private void FlipSprite()
     //if the player is moving horizontally
     {
@@ -97,6 +98,18 @@ public class Player : MonoBehaviour
         {
             //reverse the current scaling of x axis
             transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
+        }
+    }
+
+    private void Die()
+    {
+        if (myBodyColldier.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
+        {
+            isAlive = false;
+            myAnimator.SetTrigger("Dying");
+            myBodyColldier.sharedMaterial = null;
+            GetComponent<Rigidbody2D>().velocity = deathKick;
+            myRigidBody.freezeRotation = false;
         }
     }
 
