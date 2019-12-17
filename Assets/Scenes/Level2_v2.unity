@@ -6382,7 +6382,7 @@ PrefabInstance:
     - target: {fileID: 6930664155274099573, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6930664155274099592, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
@@ -6422,33 +6422,43 @@ PrefabInstance:
     - target: {fileID: 8284398299307605078, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: orthographic size
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8284398299307605161, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.19
+      value: -14.128855
       objectReference: {fileID: 0}
     - target: {fileID: 8284398299307605161, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.668014
       objectReference: {fileID: 0}
     - target: {fileID: 8284398299307605161, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -66.43
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 8284398299958200192, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8284398299958200194, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 285770356}
+    - target: {fileID: 8284398299958200195, guid: fcd98947729e71540a62837635d5281c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.679998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284398299958200195, guid: fcd98947729e71540a62837635d5281c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.54
+      objectReference: {fileID: 0}
     - target: {fileID: 8284398299958200197, guid: fcd98947729e71540a62837635d5281c,
         type: 3}
       propertyPath: m_BoundingShape2D
