@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
             myBodyColldier.sharedMaterial = null;
             GetComponent<Rigidbody2D>().velocity = deathKick;
             myRigidBody.freezeRotation = false;
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 
