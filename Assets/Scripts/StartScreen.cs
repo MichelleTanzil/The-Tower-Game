@@ -9,5 +9,5 @@ public class StartScreen : MonoBehaviour
     public void StartMainMenu()
     {
         SceneManager.LoadScene(0);
-    }
+    }   
 }

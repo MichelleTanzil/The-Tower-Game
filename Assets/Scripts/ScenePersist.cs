@@ -5,32 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class ScenePersist : MonoBehaviour
 {
+    static ScenePersist instance = null;
     int startingSceneIndex;
-    private void Awake()
+
+    void Start()
     {
-        int numScenePersist = FindObjectsOfType<ScenePersist>().Length;
-        if (numScenePersist > 1)
+        if (!instance)
+        {
+            instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            startingSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
-        else 
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        startingSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (currentSceneIndex != startingSceneIndex)
+        if (startingSceneIndex != SceneManager.GetActiveScene().buildIndex)
         {
+            instance = null;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
             Destroy(gameObject);
         }
     }

@@ -9,4 +9,16 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("Pressed Enter");
+            SceneManager.LoadScene(1);
+        }
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
