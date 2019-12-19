@@ -18,11 +18,11 @@ public class SkeletonMovement : MonoBehaviour
     {
         if (IsFacingRight())
         {
-            myRigidBody.velocity = new Vector2(moveSpeed, 0f);
+            myRigidBody.velocity = new Vector2(moveSpeed, myRigidBody.velocity.y);
         }
         else
         {
-            myRigidBody.velocity = new Vector2(-moveSpeed, 0f);
+            myRigidBody.velocity = new Vector2(-moveSpeed,  myRigidBody.velocity.y);
         }
     }
 

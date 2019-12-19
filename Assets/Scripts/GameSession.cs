@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameSession : MonoBehaviour
 {
     [SerializeField] int playerLives = 3;
+    [SerializeField] Text livesText;
 
 
     private void Awake()
@@ -19,6 +21,10 @@ public class GameSession : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+    }
+    private void Start()
+    {
+        livesText.text = playerLives.ToString();
     }
 
     public void ProcessPlayerDeath()
@@ -42,12 +48,15 @@ public class GameSession : MonoBehaviour
     private void TakeLife()
     {
         playerLives--;
+        livesText.text = playerLives.ToString();
         var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    private void GainLife()
+    public void GainLife(int heartPickUp)
     {
-        playerLives++;
+        playerLives += heartPickUp;
+        livesText.text = playerLives.ToString();
+
     }
 }
